@@ -1,0 +1,38 @@
+# PostgreSQL. Versions 9.3 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On macOS with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On macOS with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+#
+# Configure Using Gemfile
+# gem "pg"
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: <%= 'postgres'%>
+  password: <%= 'postgres' %>
+  host: <%= 'localhost' %>
+  port: 5432
+  pool: 5
+
+development:
+  <<: *default
+  database: sabor_do_sul_bauruteria_development
+
+test:
+  <<: *default
+  database: sabor_do_sul_bauruteria_test
+
+production:
+  <<: *default
+  database: sabor_do_sul_bauruteria_production
+  username: sabor_do_sul_bauruteria
+  password: <%= ENV["SABOR_DO_SUL_BAURUTERIA_DATABASE_PASSWORD"] %>
